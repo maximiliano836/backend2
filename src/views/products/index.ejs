@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos</title>
+  <style>
+    body{font-family:sans-serif;max-width:800px;margin:2rem auto;padding:0 1rem}
+    ul{padding-left:1rem}
+    li{margin:.4rem 0}
+    .role{font-size:.9rem;color:#666}
+    form{display:inline}
+  </style>
+</head>
+<body>
+  <h1>Productos</h1>
+  <% if (user) { %>
+    <p>Bienvenido <strong><%= user.name %></strong> (<%= user.email %>) <span class="role">- Rol: <%= user.role %></span></p>
+  <% } %>
+  <p>
+    <form method="post" action="/logout"><button type="submit">Salir</button></form>
+  </p>
+  <ul>
+    <% items.forEach(item => { %>
+      <li>
+        <%= item.name %> - $ <%= item.price %>
+        <% if (isAdmin) { %>
+          [Admin: editar | eliminar]
+        <% } else { %>
+          [Agregar al carrito]
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
