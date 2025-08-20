@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import Product from '../models/Product.js';
 
 const router = Router();
 
@@ -7,12 +8,8 @@ function requireAuth(req, res, next) {
   next();
 }
 
-router.get('/', requireAuth, (req, res) => {
-  const items = [
-    { id: 1, name: 'Producto A', price: 10 },
-    { id: 2, name: 'Producto B', price: 20 },
-    { id: 3, name: 'Producto C', price: 30 }
-  ];
+router.get('/', requireAuth, async (req, res) => {
+  const items = await Product.find().lean();
   res.render('products/index', { items });
 });
 

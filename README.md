@@ -1,31 +1,40 @@
 # backend2
 
-Proyecto Express básico y simplificado (principiante) con login/registro, sesiones (cookie), roles y almacenamiento en archivo.
+Proyecto Express básico con login/registro, sesiones y roles, usando solo MongoDB Atlas para guardar datos.
 
 ## Características
-- Vistas EJS simples (sin layouts ni estáticos)
-- Login y Registro (usuarios guardados en `data/users.json`)
+- Vistas EJS simples
+- Login y Registro (usuarios en MongoDB)
 - Rol admin si ingresás con `adminCoder@coder.com` y contraseña `admin123`
-- Redirección a `/products` luego de login/registro
-- Bienvenida en productos con datos del usuario logueado
-- Sesiones con `express-session` (cookie de sesión)
+- Productos de ejemplo guardados en MongoDB
+- Sesiones con `express-session` almacenadas en MongoDB
 
 ## Requisitos
 - Node.js 18+
+- Cuenta en MongoDB Atlas
+
+## Configurar MongoDB Atlas (requerido)
+1. Crea un cluster y un usuario con permisos de lectura/escritura.
+2. En Network Access, permite tu IP (o 0.0.0.0/0 solo para desarrollo).
+3. Crea `.env` a partir de `.env.example` y completa:
+
+```
+MONGODB_URI=mongodb+srv://<usuario>:<password>@<cluster>.mongodb.net
+MONGODB_DB=sessionsdb
+SESSION_SECRET=un-secreto-mas-largo-en-produccion
+PORT=8080
+```
 
 ## Cómo correr
-1. Instalar dependencias
-2. Iniciar el servidor
-3. Abrir http://localhost:3000
+1. npm install
+2. npm run start
+3. Abrí http://localhost:3000
 
 ## Rutas principales
-- `GET /login` – formulario de login
-- `POST /login` – procesa login
-- `GET /register` – formulario de registro
-- `POST /register` – procesa registro
-- `POST /logout` – cierra sesión
-- `GET /products` – requiere sesión; muestra productos y saludo
+- GET /login, POST /login
+- GET /register, POST /register
+- POST /logout
+- GET /products (requiere sesión)
 
 ## Notas
-- Usuarios se guardan en `data/users.json` (simple file storage para demo)
 - No subas `node_modules` al repo.

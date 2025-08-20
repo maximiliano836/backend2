@@ -21,16 +21,16 @@
     <form method="post" action="/logout"><button type="submit">Salir</button></form>
   </p>
   <ul>
-    <% items.forEach(item => { %>
+    <% for (const item of items) { %>
       <li>
-        <%= item.name %> - $ <%= item.price %>
+        <%= item.name || item.title %>
+        <% if (item.description) { %> - <%= item.description %> <% } %>
+        <% if (item.price != null) { %> - $ <%= item.price %> <% } %>
         <% if (isAdmin) { %>
           [Admin: editar | eliminar]
-        <% } else { %>
-          [Agregar al carrito]
         <% } %>
       </li>
-    <% }) %>
+    <% } %>
   </ul>
 </body>
 </html>
